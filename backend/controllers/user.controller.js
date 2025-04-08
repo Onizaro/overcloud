@@ -5,6 +5,8 @@ import recipient from '../models/recipient.model.js';
 import file from '../models/file.model.js';
 import jwt from 'jsonwebtoken'; 
 import cron from 'node-cron';
+import dotenv from 'dotenv';
+dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const transporter = nodemailer.createTransport({

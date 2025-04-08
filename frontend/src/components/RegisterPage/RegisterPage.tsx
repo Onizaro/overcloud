@@ -36,8 +36,20 @@ const RegisterPage: React.FC = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const validatePassword = (password: string) => {
+        // Vérifie les conditions : au moins 8 caractères, 1 majuscule, 1 minuscule, et 1 caractère spécial
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/;
+        return passwordRegex.test(password);
+    };
+    
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+
+        if (!validatePassword(formData.password)) {
+            setMessage('Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule et un caractère spécial.');
+            return;
+        }
         try {
             const response = await registerUser(formData);
             setMessage(response.message);
