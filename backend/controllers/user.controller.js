@@ -6,7 +6,7 @@ import file from '../models/file.model.js';
 import jwt from 'jsonwebtoken'; 
 import cron from 'node-cron';
 
-const JWT_SECRET = "ici_il_faut_le_remplacer_par_une_variable_d'environnement";
+const JWT_SECRET = process.env.JWT_SECRET;
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
