@@ -59,20 +59,21 @@ const uploadController = {
      * @param {import('express').Response} res - response object
      */
     deleteFile: async (req, res) => {
-        const { fileName } = req.params;
-        console.log(fileName);
+        const { id } = req.params;  // Changer fileName en id
+        console.log(id);
 
         try {
-            const serviceResponse = await uploadService.deleteFile(fileName);
+            const serviceResponse = await uploadService.deleteFile(id);  // Utiliser id
 
             // Supprime aussi les métadonnées du fichier dans DynamoDB
-            await FileService.deleteFileMetadata(fileName);
+            await FileService.deleteFileMetadata(id);  // Utiliser id
             console.log('Fichier supprimé :', serviceResponse);
             res.status(204).send(serviceResponse);
         } catch (error) {
             res.status(500).send(error.message);
         }
     },
+
 
     /**
      * Get all files

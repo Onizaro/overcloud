@@ -22,11 +22,11 @@ export default class FileService {
     return await DynamoService.getItems(params); // Récupère les fichiers depuis DynamoDB
   }
 
-  static async deleteFileMetadata(fileName) {
+  static async deleteFileMetadata(id) {  // Changer fileName en id
     const params = {
       TableName: 'Files',
       Key: {
-        name: { S: fileName }, 
+        id: { S: id },  // Utiliser id ici
       },
     };
     return await DynamoService.deleteItem(params); // Supprime le fichier dans DynamoDB

@@ -58,20 +58,21 @@ const uploadService = {
      * @param {string} fileName - name of the file to be deleted
      * @returns response from S3
      */
-    deleteFile: async (fileName) => {
+    deleteFile: async (id) => {  // Changer fileName en id
         const params = {
             Bucket: bucketName,
-            Key: fileName,
+            Key: id,  // Utiliser id
         };
 
         try {
             const command = new DeleteObjectCommand(params);
             await s3.send(command);
-            return `File ${fileName} deleted successfully`;
+            return `File ${id} deleted successfully`;  // Utiliser id
         } catch (error) {
             throw new Error(`File deletion failed: ${error.message}`);
         }
     },
+
 
     /**
      * Get all files from S3 bucket

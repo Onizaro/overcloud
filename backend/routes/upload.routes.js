@@ -13,7 +13,7 @@ router.post('/upload',authenticateToken, upload.single('file'), (req, res) => {
     uploadController.uploadFile(req, res);
 });
 router.get('/upload/:fileName',authenticateToken, uploadController.downloadFile);
-router.delete('/upload/:fileName',authenticateToken, uploadController.deleteFile);
+router.delete('/upload/:id',authenticateToken, uploadController.deleteFile);
 router.get('/uploads',authenticateToken, uploadController.getFiles);
 
 export default router;

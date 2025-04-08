@@ -53,17 +53,18 @@ function DocumentPage() {
     }
   };
 
-  const handleDelete = async (filename) => {
-    const confirmed = window.confirm(`Supprimer le fichier "${filename}" ?`);
+  const handleDelete = async (id) => {  // Changer filename en id
+    const confirmed = window.confirm(`Supprimer le fichier avec l'ID "${id}" ?`);
     if (!confirmed) return;
 
     try {
-      await fetch(`http://localhost:3000/api/upload/${filename}`, {
+      await fetch(`http://localhost:3000/api/upload/${id}`, {  // Utiliser id
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
         },
       });
+
 
       setMessage('Fichier supprimé.');
       fetchDocuments();
@@ -134,7 +135,7 @@ function DocumentPage() {
               >
                 {file.name}
               </a>
-              <button onClick={() => handleDelete(file.name)}>🗑 Supprimer</button>
+              <button onClick={() => handleDelete(file.id)}>🗑 Supprimer</button>
             </li>
           ))}
         </ul>
