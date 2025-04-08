@@ -8,6 +8,7 @@ services:
       - "4566:4566"
     networks:
       - backend_to_localstack
+      - backend_to_mongo
       
   mongo:
     image: mongo
@@ -43,6 +44,7 @@ services:
       - backend_to_mongo
       - backend_to_localstack
       - frontend_network
+    restart: always
 
 volumes:
   mongo-data:

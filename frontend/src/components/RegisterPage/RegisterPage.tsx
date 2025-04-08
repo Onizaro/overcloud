@@ -120,7 +120,7 @@ const RegisterPage: React.FC = () => {
                     onChange={handleChange}
                     required
                 />
-                <button className="turquoise-button" type="submit">Log in</button>
+                <button className="turquoise-button" type="submit">Register</button>
             </form>
             ) : (
                 <form onSubmit={handleVerifyCode}>
