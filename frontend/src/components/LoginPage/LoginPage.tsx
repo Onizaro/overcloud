@@ -107,7 +107,7 @@ const LoginPage: React.FC = () => {
             ) : (
                 <form onSubmit={handleVerifyCode}>
                     <p className="verification-info">
-                        Un code de vérification a été envoyé à votre adresse e-mail.
+                        Un code de vérification a été envoyé à votre adresse e-mail. (Vérifiez vos spams !)
                     </p>
                     <input
                         type="text"

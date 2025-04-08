@@ -57,7 +57,10 @@ export async function getFileById(req, res) {
 export async function updateFile(req, res) {
     try {
         const { id } = req.params;
-        const updates = req.body;
+        const { name, path, type, userId } = req.body;
+        if (!name || !path || !type || !userId) {
+            return res.status(400).json({ error: 'Missing required fields: name, path, type, or userId' });
+        }
         const params = {
             TableName: 'Files',
             Key: {
@@ -71,10 +74,10 @@ export async function updateFile(req, res) {
                 '#userId': 'userId',
             },
             ExpressionAttributeValues: {
-                ':name': { S: updates.name },
-                ':path': { S: updates.path },
-                ':type': { S: updates.type },
-                ':userId': { S: updates.userId },
+                ':name': { S: name },
+                ':path': { S: path },
+                ':type': { S: type },
+                ':userId': { S: userId },
             },
             ReturnValues: 'ALL_NEW',
         };
