@@ -1,41 +1,33 @@
 import AWS from 'aws-sdk';
+const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const TABLE_NAME = process.env.DYNAMODB_TABLE_USERS;
 
-// Configure DynamoDB
-const dynamoDB = new AWS.DynamoDB.DocumentClient({
-    region: 'eu-west-3', 
-});
-
-// Table name
-const TABLE_NAME = 'Users';
-
-// Create a user
-export const createUser = async (user) => {
+export const getUserById = async (userId) => {
     const params = {
         TableName: TABLE_NAME,
-        Item: user,
+        Key: { id: userId },
     };
-    return dynamoDB.put(params).promise();
+    try {
+        const { Item } = await dynamoDB.get(params).promise();
+        return Item;
+    } catch (error) {
+        console.error("DynamoDB error:", error);
+        throw new Error("Unable to fetch user");
+    }
 };
 
-// Get a user by email
-export const getUserByEmail = async (email) => {
+export const createUser = async (userData) => {
     const params = {
         TableName: TABLE_NAME,
-        Key: { email },
+        Item: userData,
     };
-    const result = await dynamoDB.get(params).promise();
-    return result.Item;
+    try {
+        await dynamoDB.put(params).promise();
+        return userData;
+    } catch (error) {
+        console.error("DynamoDB error:", error);
+        throw new Error("Unable to create user");
+    }
 };
 
-// Update a user
-export const updateUser = async (email, updates) => {
-    const params = {
-        TableName: TABLE_NAME,
-        Key: { email },
-        UpdateExpression: 'set #attr = :value',
-        ExpressionAttributeNames: { '#attr': Object.keys(updates)[0] },
-        ExpressionAttributeValues: { ':value': Object.values(updates)[0] },
-        ReturnValues: 'UPDATED_NEW',
-    };
-    return dynamoDB.update(params).promise();
-};
+// Ajouter d'autres méthodes selon les besoins (e.g., updateUser, deleteUser)

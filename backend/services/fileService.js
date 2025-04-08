@@ -5,7 +5,7 @@ export default class FileService {
     const params = {
       TableName: 'Files',
       Item: {
-        id: { S: `${Date.now()}` }, 
+        id: { S: `${Date.now()}` },
         name: { S: fileData.name },
         path: { S: fileData.path },
         type: { S: fileData.type },
@@ -30,6 +30,5 @@ export default class FileService {
       },
     };
     return await DynamoService.deleteItem(params); // Supprime le fichier dans DynamoDB
-}
-
+  }
 }

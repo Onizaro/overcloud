@@ -10,17 +10,10 @@ import { s3, bucketName } from '../cloud-setup/bucket.setup.js';
  * Upload file to S3 bucket
  */
 const uploadService = {
-
-    /**
-     * Upload file to S3 bucket
-     * @param {string} fileName - name of the file to be uploaded
-     * @param {Buffer} fileContent - content of the file to be uploaded
-     * @returns response from S3
-     */
-    uploadFile:  async (fileName, fileContent) => {
+    uploadFile:  async (id, fileContent) => {
         const params = {
             Bucket: bucketName,
-            Key: fileName,
+            Key: id,  // Utiliser id pour le nom du fichier
             Body: fileContent,
         };
 
@@ -33,15 +26,10 @@ const uploadService = {
         }
     },
 
-    /**
-     * Get file from S3 bucket
-     * @param {string} fileName - name of the file to be retrieved
-     * @returns content of the file
-     */
-    getFile: async (fileName) => {
+    getFile: async (id) => {
         const params = {
             Bucket: bucketName,
-            Key: fileName,
+            Key: id,  // Utiliser id pour le nom du fichier
         };
 
         try {
@@ -53,11 +41,6 @@ const uploadService = {
         }
     },
 
-    /**
-     * Delete file from S3 bucket
-     * @param {string} fileName - name of the file to be deleted
-     * @returns response from S3
-     */
     deleteFile: async (id) => {  // Changer fileName en id
         const params = {
             Bucket: bucketName,
@@ -73,11 +56,6 @@ const uploadService = {
         }
     },
 
-
-    /**
-     * Get all files from S3 bucket
-     * @returns - list of files in the bucket
-     */
     getFiles: async () => {
         const params = {
             Bucket: bucketName,

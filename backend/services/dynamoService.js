@@ -1,4 +1,4 @@
-import { DynamoDBClient, GetItemCommand, PutItemCommand, UpdateItemCommand, DeleteItemCommand, DescribeTableCommand, CreateTableCommand,  ScanCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, GetItemCommand, PutItemCommand, UpdateItemCommand, DeleteItemCommand, DescribeTableCommand, CreateTableCommand, ScanCommand } from '@aws-sdk/client-dynamodb';
 
 const localStackEndpoint = 'http://localstack:4566';
 
@@ -14,7 +14,6 @@ const dynamoDb = new DynamoDBClient({
 const DynamoService = {
     getItem: async (params) => {
         try {
-            // Ensure the table exists
             await DynamoService.ensureTableExists(params.TableName);
 
             const command = new GetItemCommand(params);
@@ -41,7 +40,6 @@ const DynamoService = {
 
     putItem: async (params) => {
         try {
-            // Ensure the table exists
             await DynamoService.ensureTableExists(params.TableName);
 
             const command = new PutItemCommand(params);
@@ -53,23 +51,8 @@ const DynamoService = {
         }
     },
 
-    updateItem: async (params) => {
-        try {
-            // Ensure the table exists
-            await DynamoService.ensureTableExists(params.TableName);
-
-            const command = new UpdateItemCommand(params);
-            const result = await dynamoDb.send(command);
-            return result.Attributes;
-        } catch (error) {
-            console.error('Error updating item in DynamoDB', error);
-            throw new Error('Error updating item in DynamoDB');
-        }
-    },
-
     deleteItem: async (params) => {
         try {
-            // Ensure the table exists
             await DynamoService.ensureTableExists(params.TableName);
 
             const command = new DeleteItemCommand(params);
@@ -83,13 +66,11 @@ const DynamoService = {
 
     ensureTableExists: async (tableName) => {
         try {
-            // Check if the table exists
             const describeCommand = new DescribeTableCommand({ TableName: tableName });
             await dynamoDb.send(describeCommand);
             console.log(`Table '${tableName}' exists.`);
         } catch (error) {
             if (error.name === 'ResourceNotFoundException') {
-                // Table does not exist, create it
                 console.log(`Table '${tableName}' not found. Creating table...`);
                 await DynamoService.createTable(tableName);
             } else {
