@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { getUserSession, destroyUserSession } from '../../services/session.service';
 import { useAuth } from '../../authContext';
 import './Navbar.css';
@@ -9,13 +10,13 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbarOptions">
         <div className="navbar-logo">
-          <a href="/">OverCloud</a>
+          <Link to="/">OverCloud</Link>
         </div>
         <ul className="navbar-links">
-          <li><a href="/">Dashboard</a></li>
-          <li><a href="/features">Features</a></li>
-          <li><a href="/pricing">Pricing</a></li>
-          <li><a href="/about">About</a></li>
+          <li><Link to="/">Dashboard</Link></li>
+          <li><Link to="/features">Features</Link></li>
+          <li><Link to="/pricing">Pricing</Link></li>
+          <li><Link to="/about">About</Link></li>
         </ul>
         <div className="navbar-auth">
           {isAuthenticated ? (
@@ -24,8 +25,8 @@ function Navbar() {
             </button>
           ) : (
             <>
-              <a href="/login" className="auth-link">Login</a>
-              <a href="/register" className="auth-link signup-btn">Register</a>
+              <Link to="/login" className="auth-link">Login</Link>
+              <Link to="/register" className="auth-link signup-btn">Register</Link>
             </>
           )}
         </div>
@@ -42,4 +43,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
