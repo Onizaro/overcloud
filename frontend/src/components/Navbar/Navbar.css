@@ -1,0 +1,83 @@
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.navbarOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-logo a {
+  color: white;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar-auth .auth-link {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.signup-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color:  #007bff;
+  color:  #007bff;
+}
+
+
+/* Styles for the search bar */
+.navbar-search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #444;
+}
+
+.search-label {
+  color: white;
+  font-size: 16px;
+  margin-right: 10px; /* Space between label and input */
+}
+
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+/* Padding to prevent content overlap */
+body {
+  padding-top: 100px;
+}

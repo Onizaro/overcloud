@@ -1,0 +1,41 @@
+.sidebar {
+    position: fixed;
+    top: 130px; /* Starts just below the navbar */
+    left: 0;
+    width: 200px; /* Fixed width for sidebar */
+    height: calc(100vh - 100px); /* Sidebar height adjusted to avoid overlap with navbar */
+    background-color: #333;
+    padding-top: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .sidebar-options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  .sidebar-options li {
+    width: 100%;
+  }
+  
+  .sidebar-options a {
+    display: block;
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: left;
+  }
+  
+  .sidebar-options a:hover {
+    background-color: #444;
+    color: #007BFF;
+    border-left: 4px solid #007BFF;
+  }
+  

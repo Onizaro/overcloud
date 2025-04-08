@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+.background-images {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 50%; 
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes */
+  grid-template-rows: repeat(2, 1fr); /* 2 lignes */
+  gap: 0; /* Pas d'espace entre les images */
+  z-index: 1; /* Derrière le contenu */
+  pointer-events: none; /* Les clics passent à travers */
+}
+
+.background-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajuste l'image pour qu'elle remplisse son espace */
+}
+
+.container {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px; /* Largeur max pour le formulaire */
+  top: 30%; /* Déplace plus bas (ajustez selon vos besoins) */
+  left: 25%; /* Positionne horizontalement à 50% de la largeur de l'écran */
+  transform: translateX(50%); /* Déplace à droite de 50% de sa largeur */
+}
+.white {
+  color: white; /* Texte en blanc */
+  font-size: 3.5rem; /* Taille du texte */
+  font-weight: bold; /* Gras pour plus de visibilité */
+  text-align: center; /* Centrer le texte */
+  position: absolute; /* Positionnement absolu par rapport au conteneur parent */
+  top: 20%; /* Ajustez pour placer verticalement */
+  left: 50%; /* Centre horizontalement */
+  transform: translate(-50%, -50%); /* Corrige l'alignement */
+  z-index: 2; /* Au-dessus des images de fond */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Ajoute une ombre pour lisibilité */
+}
+
+.text-overlay {
+  width: 100%;
+  top: 20px; /* Ajustez selon votre besoin */
+  z-index: 2;
+  pointer-events: none; /* Ignore les clics sur le texte */
+}
+
+.turquoise-button {
+  background-color: #5eecf5; /* Bleu turquoise */
+  color: white; /* Texte blanc */
+  border: none; /* Retire les bordures par défaut */
+  border-radius: 50px; /* Arrondit complètement les coins */
+  padding: 10px 20px; /* Ajuste la taille du bouton */
+  font-size: 16px; /* Taille du texte */
+  cursor: pointer; /* Change le curseur en "main" au survol */
+  transition: background-color 0.3s ease; /* Ajoute une transition pour l'effet hover */
+}
+
+/* Effet hover (survol) */
+.turquoise-button:hover {
+  background-color: #5eecf5; /* Couleur légèrement plus foncée au survol */
+}
+
+/* Optionnel : effet focus (clavier ou clic) */
+.turquoise-button:focus {
+  outline: none; /* Retire l'encadrement par défaut */
+  box-shadow: 0 0 5px #5eecf5; /* Ajoute une légère ombre pour indiquer le focus */
+}
