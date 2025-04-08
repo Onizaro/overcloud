@@ -1,15 +1,5 @@
 services:
-  localstack:
-    image: localstack/localstack:latest
-    build: 
-      context: localstack
-      dockerfile: localstack.Dockerfile
-    ports:
-      - "4566:4566"
-    networks:
-      - backend_to_localstack
-      - backend_to_mongo
-      
+ 
   mongo:
     image: mongo
     ports:
@@ -19,16 +9,6 @@ services:
     networks:
       - backend_to_mongo
 
-  frontend:
-    container_name: frontend
-    build:
-      context: frontend
-      dockerfile: frontend.Dockerfile
-    ports:
-      - "8085:8085"
-    networks:
-      - frontend_network
-  
   app:
     build:
       context: backend
@@ -39,17 +19,8 @@ services:
       - MONGODB_URI=mongodb://mongo:27017/overcloud-db
     depends_on:
       - mongo
-      - localstack
-    networks:
-      - backend_to_mongo
-      - backend_to_localstack
-      - frontend_network
     restart: always
 
-volumes:
-  mongo-data:
 
 networks:
-  frontend_network:
-  backend_to_mongo:
-  backend_to_localstack:
+  default:

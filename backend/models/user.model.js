@@ -1,20 +1,41 @@
-import { Schema, model } from 'mongoose';
+import AWS from 'aws-sdk';
 
-const userSchema = new Schema({
-    email: String,
-    password: String,
-    firstname: String,
-    lastname: String,
-    verificationCode: Number,
-    codeExpiration: Date,
-    twoFactorFrequency: { type: String, default: 'always' }, // 'always', 'monthly', 'newDevice'
-    lastTwoFactorSuccess: Date, 
-    knownDevices: [String],
-    token: { type: String, default: null },
-    status: { type: String, default: 'alive' }, // 'alive', 'checking', 'deceased'
-    lastConnection: { type: Date, default: Date.now },
-}, { versionKey: false });
+// Configure DynamoDB
+const dynamoDB = new AWS.DynamoDB.DocumentClient({
+    region: 'eu-west-3', 
+});
 
-const userModel = model('User', userSchema);
+// Table name
+const TABLE_NAME = 'Users';
 
-export default userModel;
+// Create a user
+export const createUser = async (user) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Item: user,
+    };
+    return dynamoDB.put(params).promise();
+};
+
+// Get a user by email
+export const getUserByEmail = async (email) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Key: { email },
+    };
+    const result = await dynamoDB.get(params).promise();
+    return result.Item;
+};
+
+// Update a user
+export const updateUser = async (email, updates) => {
+    const params = {
+        TableName: TABLE_NAME,
+        Key: { email },
+        UpdateExpression: 'set #attr = :value',
+        ExpressionAttributeNames: { '#attr': Object.keys(updates)[0] },
+        ExpressionAttributeValues: { ':value': Object.values(updates)[0] },
+        ReturnValues: 'UPDATED_NEW',
+    };
+    return dynamoDB.update(params).promise();
+};
