@@ -6,7 +6,8 @@ import DocumentPage from './components/DocumentPage/DocumentPage';
 import LoginPage from './components/LoginPage/LoginPage';
 import RegisterPage from './components/RegisterPage/RegisterPage';
 import Features from './components/Features/Features';
-import Pricing from './components/PricingPage/Pricing'; // Importez le composant Pricing
+import Pricing from './components/PricingPage/Pricing';
+import About from './components/AboutPage/About'; // Importez le composant About
 import './App.css';
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
               <Route path="/" element={<DocumentPage />} />
               <Route path="/documents" element={<DocumentPage />} />
               <Route path="/features" element={<Features />} />
-              <Route path="/pricing" element={<Pricing />} /> {/* Ajout de la route pour Pricing */}
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/about" element={<About />} /> {/* Ajout de la route pour About */}
               <Route
                 path="/login"
                 element={<div className="top-container"><LoginPage /></div>}
