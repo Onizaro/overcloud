@@ -2,7 +2,7 @@
     width: 100%;
     padding: 40px 20px;
     background-color: #f9fbff;
-    background-image: 
+    /*background-image: 
       linear-gradient(to bottom right, rgba(173, 216, 230, 0.2), rgba(255, 255, 255, 0)),
       url('/path-to-cloud-pattern.png'); /* Vous pouvez ajouter un motif subtil de nuage en arrière-plan */
     background-size: cover;
@@ -23,13 +23,13 @@
   }
   
   .features-container::before {
-    background-image: url('/path-to-cloud-icon.svg');
+    /*background-image: url('/path-to-cloud-icon.svg');*/
     top: 5%;
     left: 2%;
   }
   
   .features-container::after {
-    background-image: url('/path-to-cloud-icon.svg');
+    /*background-image: url('/path-to-cloud-icon.svg');*/
     bottom: 5%;
     right: 2%;
   }
@@ -98,7 +98,7 @@
     right: 0;
     width: 80px;
     height: 80px;
-    background-image: url('/path-to-cloud-icon.svg');
+    /*background-image: url('/path-to-cloud-icon.svg');*/
     background-size: contain;
     background-repeat: no-repeat;
     opacity: 0.1;

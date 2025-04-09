@@ -51,7 +51,7 @@ describe('DocumentPage Component', () => {
     render(<DocumentPage />);
 
     // Verify fetch was called correctly
-    expect(fetch).toHaveBeenCalledWith('http://localhost:3000/api/files', {
+    expect(fetch).toHaveBeenCalledWith('http://35.180.33.218:3000/api/files', {
       headers: {
         Authorization: 'Bearer fake-token'
       }
@@ -94,7 +94,7 @@ describe('DocumentPage Component', () => {
 
     // Verify the upload fetch was called
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith('http://localhost:3000/api/upload', {
+      expect(fetch).toHaveBeenCalledWith('http://35.180.33.218:3000/api/upload', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer fake-token'
@@ -159,7 +159,7 @@ describe('DocumentPage Component', () => {
 
     // Verify that the delete fetch was called
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith('http://localhost:3000/api/upload/1', {
+      expect(fetch).toHaveBeenCalledWith('http://35.180.33.218:3000/api/upload/1', {
         method: 'DELETE',
         headers: {
           Authorization: 'Bearer fake-token'
@@ -231,7 +231,7 @@ describe('DocumentPage Component', () => {
 
     // Verify the upload fetch was called
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith('http://localhost:3000/api/upload', {
+      expect(fetch).toHaveBeenCalledWith('http://35.180.33.218:3000/api/upload', {
         method: 'POST',
         headers: {
           Authorization: 'Bearer fake-token'

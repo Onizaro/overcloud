@@ -7,28 +7,34 @@ function DocumentPage() {
 
   const token = localStorage.getItem('token');
 
-  const fetchDocuments = async () => {
+  const fetchDocuments = async (token) => {
     try {
-      const res = await fetch('http://localhost:3000/api/files', {
+      const res = await fetch('https://35.180.33.218:3000/api/files', {
         headers: {
           Authorization: `Bearer ${token}`
         },
       });
       const data = await res.json();
-      // Extraction des valeurs .S
+
       const cleanData = data.map((doc) => ({
-        name: doc.name.S,
-        path: doc.path.S,
-        id: doc.id.S
+        name: doc.Key,
+        id: doc.Key
       }));
       setDocuments(cleanData);
     } catch (error) {
       setMessage('Erreur lors du chargement des documents.');
+      console.error(error);
     }
   };
 
   useEffect(() => {
-    fetchDocuments();
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
+      setMessage('Vous devez être connecté pour accéder à cette page.');
+      return; // Empêche le chargement des documents si pas de token
+    }
+    fetchDocuments(token);
   }, []);
 
   const handleFileUpload = async (event) => {
@@ -36,9 +42,10 @@ function DocumentPage() {
     if (!file) return;
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('originalname', file.name);
 
     try {
-      await fetch('http://localhost:3000/api/upload', {
+      await fetch('https://35.180.33.218:3000/api/upload', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`
@@ -53,23 +60,40 @@ function DocumentPage() {
     }
   };
 
-  const handleDelete = async (id) => {  // Changer filename en id
-    const confirmed = window.confirm(`Supprimer le fichier avec l'ID "${id}" ?`);
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm(`Supprimer le fichier "${id}" ?`);
     if (!confirmed) return;
 
     try {
-      await fetch(`http://localhost:3000/api/upload/${id}`, {  // Utiliser id
+      await fetch(`https://35.180.33.218:3000/api/upload/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
         },
       });
 
-
       setMessage('Fichier supprimé.');
       fetchDocuments();
     } catch (error) {
       setMessage('Erreur lors de la suppression.');
+    }
+  };
+
+  const handleDownload = async (id) => {
+    try {
+      const res = await fetch(`https://35.180.33.218:3000/api/files/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.open(data.url, '_blank');
+      } else {
+        setMessage('URL signée non reçue.');
+      }
+    } catch (error) {
+      setMessage("Erreur lors de la récupération de l'URL signée.");
     }
   };
 
@@ -83,9 +107,10 @@ function DocumentPage() {
     if (!file) return;
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('originalname', file.name);
 
     try {
-      await fetch('http://localhost:3000/api/upload', {
+      await fetch('https://35.180.33.218:3000/api/upload', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`
@@ -127,14 +152,7 @@ function DocumentPage() {
         <ul>
           {documents.map((file) => (
             <li key={file.id}>
-              <a
-                href={file.path}
-                target="_blank"
-                rel="noopener noreferrer"
-                download={file.name}
-              >
-                {file.name}
-              </a>
+              <button onClick={() => handleDownload(file.id)}>{file.name}</button>
               <button onClick={() => handleDelete(file.id)}>🗑 Supprimer</button>
             </li>
           ))}
