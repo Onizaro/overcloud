@@ -9,7 +9,7 @@ function DocumentPage() {
 
   const fetchDocuments = async (token) => {
     try {
-      const res = await fetch('http://35.180.33.218:3000/api/files', {
+      const res = await fetch('http://15.237.220.104:3000/api/files', {
         headers: {
           Authorization: `Bearer ${token}`
         },
@@ -45,7 +45,7 @@ function DocumentPage() {
     formData.append('originalname', file.name);
 
     try {
-      await fetch('http://35.180.33.218:3000/api/upload', {
+      await fetch('http://15.237.220.104:3000/api/upload', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`
@@ -65,7 +65,7 @@ function DocumentPage() {
     if (!confirmed) return;
 
     try {
-      await fetch(`http://35.180.33.218:3000/api/upload/${id}`, {
+      await fetch(`http://15.237.220.104:3000/api/upload/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`
@@ -81,7 +81,7 @@ function DocumentPage() {
 
   const handleDownload = async (id) => {
     try {
-      const res = await fetch(`http://35.180.33.218:3000/api/files/${id}`, {
+      const res = await fetch(`http://15.237.220.104:3000/api/files/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         },
@@ -110,7 +110,7 @@ function DocumentPage() {
     formData.append('originalname', file.name);
 
     try {
-      await fetch('http://35.180.33.218:3000/api/upload', {
+      await fetch('http://15.237.220.104:3000/api/upload', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`

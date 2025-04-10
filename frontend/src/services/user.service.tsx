@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://35.180.33.218:3000/api/users'; 
+const API_URL = 'http://15.237.220.104:3000/api/users'; 
 
 interface RegisterData {
   email: string;
